@@ -2,7 +2,7 @@
     <div>
 <!--        <simple-table :inventories="inventories" :fields="fields"></simple-table>-->
             <b-row>
-                <b-col cols="2">
+                <b-col cols="3">
                     <b-button variant="warning" @click="editInventory">Edit inventory</b-button>
                     <b-button variant="success" v-b-modal.modal-item>Add new item</b-button>
                 </b-col>

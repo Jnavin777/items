@@ -19,7 +19,7 @@ class ProfileController extends Controller
 
     public function myProfile()
     {
-        $user  = User::where(['id' => Auth::id()])->with('roles')->first();
+        $user = User::where(['id' => Auth::id()])->with('roles','teams', 'ownedTeams')->first();
 
         return view('profile::my-profile', compact('user'));
     }

@@ -18,4 +18,9 @@ class Branch extends Model
     {
         return $this->hasMany(Inventory::class);
     }
+
+    public function respUser()
+    {
+        return $this->belongsTo(User::class,'resp_user_id');
+    }
 }

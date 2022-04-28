@@ -31,11 +31,14 @@ Route::middleware(['auth', 'auth.lock'])->group(function () {
 
     Route::get('/inventory/get-items', [InventoryController::class,'getItems'])->name('inventory.getItems');
     Route::get('/inventory/{inventory}/items', [ItemController::class,'getItemsByInventory'])->name('category.getItemsByInventory');
-    Route::resource('/inventory', InventoryController::class)->middleware(['role_or_permission:super-admin|edit inventories']);
+    Route::resource('/inventory', InventoryController::class);
 
-    Route::get('/branch/get_item', [BranchController::class,'getItems'])->name('branch.getItems');
-    Route::get('/branch/{id}/inventories', [BranchController::class,'getInventories'])->name('branch.getInventories');
-    Route::resource('/branch', BranchController::class);
+    Route::middleware(['role:Super Admin|Client'])->group(function() {
+        Route::get('/branch/get_item', [BranchController::class,'getItems'])->name('branch.getItems');
+        Route::get('/branch/{id}/inventories', [BranchController::class,'getInventories'])->name('branch.getInventories');
+        Route::resource('/branch', BranchController::class);
+    });
+
 
     Route::get('/category/get_item', [CategoryController::class,'getItems'])->name('category.get-items');
     Route::resource('/category', CategoryController::class);
@@ -52,6 +55,10 @@ Route::post('login/locked', [LoginController::class, 'unlock'])->name('login.unl
 Route::get('/to-locked', [LoginController::class, 'toLocked'])->name('login.toLocked');
 
 require __DIR__.'/auth.php';
+
+/**
+ * Admin Panel routes
+ */
 
 Route::prefix('admin')->middleware(['auth', 'auth.lock', 'role:Super Admin'])->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class,'dashboard'])->name('admin.dashboard');
@@ -78,18 +85,22 @@ Route::prefix('admin')->middleware(['auth', 'auth.lock', 'role:Super Admin'])->g
 Route::group(['prefix' => 'teams', 'namespace' => 'Teamwork'], function()
 {
     Route::get('/', [App\Http\Controllers\Teamwork\TeamController::class, 'index'])->name('teams.index');
-    Route::get('create', [App\Http\Controllers\Teamwork\TeamController::class, 'create'])->name('teams.create');
-    Route::post('teams', [App\Http\Controllers\Teamwork\TeamController::class, 'store'])->name('teams.store');
-    Route::get('edit/{id}', [App\Http\Controllers\Teamwork\TeamController::class, 'edit'])->name('teams.edit');
-    Route::put('edit/{id}', [App\Http\Controllers\Teamwork\TeamController::class, 'update'])->name('teams.update');
-    Route::delete('destroy/{id}', [App\Http\Controllers\Teamwork\TeamController::class, 'destroy'])->name('teams.destroy');
+
+    Route::middleware(['role:Client'])->group(function() {
+        Route::get('create', [App\Http\Controllers\Teamwork\TeamController::class, 'create'])->name('teams.create')->middleware();
+        Route::post('teams', [App\Http\Controllers\Teamwork\TeamController::class, 'store'])->name('teams.store');
+        Route::get('edit/{id}', [App\Http\Controllers\Teamwork\TeamController::class, 'edit'])->name('teams.edit');
+        Route::put('edit/{id}', [App\Http\Controllers\Teamwork\TeamController::class, 'update'])->name('teams.update');
+        Route::delete('destroy/{id}', [App\Http\Controllers\Teamwork\TeamController::class, 'destroy'])->name('teams.destroy');
+        Route::get('members/resend/{invite_id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'resendInvite'])->name('teams.members.resend_invite');
+        Route::post('members/{id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'invite'])->name('teams.members.invite');
+        Route::delete('members/{id}/{user_id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'destroy'])->name('teams.members.destroy');
+    });
+
+
     Route::get('switch/{id}', [App\Http\Controllers\Teamwork\TeamController::class, 'switchTeam'])->name('teams.switch');
 
     Route::get('members/{id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'show'])->name('teams.members.show');
-    Route::get('members/resend/{invite_id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'resendInvite'])->name('teams.members.resend_invite');
-    Route::post('members/{id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'invite'])->name('teams.members.invite');
-    Route::delete('members/{id}/{user_id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'destroy'])->name('teams.members.destroy');
-
     Route::get('accept/{token}', [App\Http\Controllers\Teamwork\AuthController::class, 'acceptInvite'])->name('teams.accept_invite');
 });
 

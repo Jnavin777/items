@@ -45,7 +45,8 @@
         <create-update-inventory-modal
             :action="actionModal"
             :inventory="inventory"
-            @updateInventory="getItems">
+            @updateInventory="getItems"
+        @resetInventoryModal="resetInventoryModal">
         </create-update-inventory-modal>
     </div>
 </template>
@@ -79,6 +80,13 @@ export default {
         }
     },
     methods: {
+        resetInventoryModal() {
+            this.inventory = {
+                name: null,
+                description: null,
+                branch: null
+            }
+        },
         confirmDelete(item) {
             let confirmMessage = item.totalItems
                 ? 'Are you sure? This Inventory has '+item.totalItems+' items'

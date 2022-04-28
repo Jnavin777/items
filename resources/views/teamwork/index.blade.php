@@ -14,11 +14,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
+                    @hasanyrole('Super Admin|Client')
                     <div class="panel-heading clearfix">
                         <a class="pull-right btn btn-default btn-sm" href="{{route('teams.create')}}">
                             <i class="fa fa-plus"></i> Создать новую команду
                         </a>
                     </div>
+                    @endhasanyrole
                     <div class="panel-body">
                         <table class="table table-striped">
                             <thead>
@@ -51,6 +53,7 @@
                                             <a href="{{route('teams.members.show', $team)}}" class="btn btn-sm btn-default">
                                                 <i class="fa fa-users"></i> Участники
                                             </a>
+
 
                                             @if(auth()->user()->isOwnerOfTeam($team))
 

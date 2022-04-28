@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-row>
-            <b-col cols="2">
+            <b-col cols="3">
                 <b-button variant="warning" @click="editBranch">Edit branch</b-button>
                 <b-button variant="success" @click="editInventory">Add new inventory</b-button>
             </b-col>

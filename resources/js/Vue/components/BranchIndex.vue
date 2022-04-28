@@ -61,19 +61,18 @@ export default {
             UPDATE: 'UPDATE',
             branch: {
                 name: null,
+                resp_user_id: null,
                 id: null
             },
             isBusy: false,
             currentPage: 1,
             nameState: null,
             perPage: 25,
-            form: {
-                name: null
-            },
             items: [],
             fields: [
                 {key:'id'},
                 {key:'name'},
+                {key:'resp_user.name', label: 'Responsible user'},
                 {key:'totalItems', label: 'Inventories'},
                 {key:'actions'},
             ]
@@ -83,21 +82,20 @@ export default {
         resetBranchModal() {
             this.branch = {
                 name: null,
+                resp_user_id: null,
                 id: null
             }
         },
         createBranch() {
             this.actionModal = this.CREATE;
-            this.branch = {
-                name: null,
-                id: null
-            };
+            this.resetBranchModal();
             this.$bvModal.show('modal-branch');
         },
         onEdit(item) {
             this.actionModal = this.UPDATE;
             this.branch.name = item.name;
             this.branch.id = item.id;
+            this.branch.resp_user_id = item.resp_user_id;
             this.$bvModal.show('modal-branch');
         },
         confirmDelete(item) {

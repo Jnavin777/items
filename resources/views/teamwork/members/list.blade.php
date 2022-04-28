@@ -47,6 +47,8 @@
                         </table>
                     </div>
                 </div>
+
+                @if(auth()->user()->isOwnerOfTeam($team))
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">Ожидающие приглашения</div>
                     <div class="panel-body">
@@ -70,8 +72,6 @@
                         </table>
                     </div>
                 </div>
-
-
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">Пригласить в команду</div>
                     <div class="panel-body">
@@ -90,8 +90,6 @@
                                     @endif
                                 </div>
                             </div>
-
-
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
@@ -102,6 +100,7 @@
                         </form>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </x-slot>

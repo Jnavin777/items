@@ -11,6 +11,20 @@
                     </span>
                 </div> <!-- end card-box -->
 
+                <div class="card-box text-center">
+                    <img src="/assets/images/users/users.png" class="rounded-circle avatar-xl img-thumbnail" alt="profile-image">
+                    <template v-if="user.owned_teams.length > 0">
+                        <h4 class="mb-0">Owned Teams</h4>
+                        <span v-for="ownedTeam in user.owned_teams" :key="ownedTeam.id">
+                        <b-badge variant="warning">{{ ownedTeam.name}}</b-badge>
+                    </span>
+                    </template>
+                    <h4 class="mb-0">Teams</h4>
+                    <span v-for="team in user.teams" :key="team.id">
+                        <b-badge variant="success">{{ team.name}}</b-badge>
+                    </span>
+                </div> <!-- end card-box -->
+
             </div> <!-- end col-->
 
             <div class="col-lg-8 col-xl-8">

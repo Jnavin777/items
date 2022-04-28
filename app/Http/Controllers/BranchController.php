@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Branch;
-use App\Http\Requests\StoreBranchRequest;
-use App\Http\Requests\UpdateBranchRequest;
 use App\Models\Inventory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -14,9 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class BranchController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -39,7 +35,9 @@ class BranchController extends Controller
     {
         $newBranch = new Branch();
         $newBranch->name = $request->get('name');
+        $newBranch->resp_user_id = $request->get('respUserId');
         $newBranch->user_id = Auth::id();
+
         $newBranch->save();
         return new JsonResponse($newBranch, Response::HTTP_OK);
     }
@@ -70,6 +68,7 @@ class BranchController extends Controller
     public function update(Request $request, Branch $branch)
     {
         $branch->name = $request->get('name');
+        $branch->resp_user_id = $request->get('resp_user_id');
         $branch->save();
         return new JsonResponse($branch, Response::HTTP_OK);
     }
@@ -86,7 +85,7 @@ class BranchController extends Controller
 
     public function getItems()
     {
-        $branches = Branch::where(['user_id' =>Auth::id()])->with('user')->get();
+        $branches = Branch::where(['user_id' =>Auth::id()])->with('user','respUser')->get();
 
         $data = [];
         if(!empty($branches)) {

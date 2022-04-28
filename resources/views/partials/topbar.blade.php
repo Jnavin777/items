@@ -67,33 +67,33 @@
             </button>
         </li>
 
-        <li class="dropdown d-none d-lg-block">
-            <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                Создать
-                <i class="mdi mdi-chevron-down"></i>
-            </a>
-            <div class="dropdown-menu">
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item">
-                    <i class="fe-briefcase mr-1"></i>
-                    <span>Новое отделение</span>
-                </a>
+{{--        <li class="dropdown d-none d-lg-block">--}}
+{{--            <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">--}}
+{{--                Создать--}}
+{{--                <i class="mdi mdi-chevron-down"></i>--}}
+{{--            </a>--}}
+{{--            <div class="dropdown-menu">--}}
+{{--                <!-- item-->--}}
+{{--                <a href="javascript:void(0);" class="dropdown-item">--}}
+{{--                    <i class="fe-briefcase mr-1"></i>--}}
+{{--                    <span>Новое отделение</span>--}}
+{{--                </a>--}}
 
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item">
-                    <i class="fe-user mr-1"></i>
-                    <span>Новую инвентаризацию</span>
-                </a>
+{{--                <!-- item-->--}}
+{{--                <a href="javascript:void(0);" class="dropdown-item">--}}
+{{--                    <i class="fe-user mr-1"></i>--}}
+{{--                    <span>Новую инвентаризацию</span>--}}
+{{--                </a>--}}
 
-                <div class="dropdown-divider"></div>
+{{--                <div class="dropdown-divider"></div>--}}
 
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item">
-                    <i class="fe-headphones mr-1"></i>
-                    <span>Техподдержка</span>
-                </a>
+{{--                <!-- item-->--}}
+{{--                <a href="javascript:void(0);" class="dropdown-item">--}}
+{{--                    <i class="fe-headphones mr-1"></i>--}}
+{{--                    <span>Техподдержка</span>--}}
+{{--                </a>--}}
 
-            </div>
-        </li>
+{{--            </div>--}}
+{{--        </li>--}}
     </ul>
 </div>
