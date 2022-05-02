@@ -9,6 +9,7 @@ use App\Services\FunctionService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -49,6 +50,11 @@ class FilterController extends Controller
     private function filterRole()
     {
         return Role::select(['id as value', 'name as text'])->get()->toArray();
+    }
+
+    private function filterPermission()
+    {
+        return Permission::select(['id as value', 'name as text'])->orderBy('id')->get()->toArray();
     }
 
     private function filterOwnedTeamsUsers()

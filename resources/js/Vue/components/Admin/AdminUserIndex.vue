@@ -90,19 +90,13 @@ export default {
                 name: null,
                 email: null,
                 password: null,
-                roles: [],
+                role: null,
                 id: null
             }
         },
         createUser() {
             this.actionModal = this.CREATE;
-            this.user = {
-                name: null,
-                email: null,
-                password: null,
-                roles: [],
-                id: null
-            };
+            this.resetUserModal();
             this.$bvModal.show('modal-user');
         },
         onEdit(item) {
@@ -110,7 +104,7 @@ export default {
             this.user.name = item.name;
             this.user.email = item.email;
             this.user.password = null;
-            this.user.roles = item.roles.map(item => item.id);
+            this.user.role = item.roles.length > 0 ? item.roles[0].id : null;
             this.user.id = item.id;
             this.$bvModal.show('modal-user');
         },

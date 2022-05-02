@@ -39,6 +39,7 @@ class AdminRoleController extends Controller
     {
         $role = new Role();
         $role->name = $request->input('name');
+        $role->syncPermissions($request->input('permissions'));
         $role->save();
 
         return new JsonResponse($role, Response::HTTP_OK);
@@ -76,6 +77,7 @@ class AdminRoleController extends Controller
     public function update(Request $request, Role $role)
     {
         $role->name = $request->input('name');
+        $role->syncPermissions($request->input('permissions'));
         $role->save();
         return new JsonResponse($role, Response::HTTP_OK);
     }
@@ -92,7 +94,7 @@ class AdminRoleController extends Controller
 
     public function getItems()
     {
-        $roles = Role::all();
+        $roles = Role::with(['permissions'])->get();
 
         return new JsonResponse($roles, Response::HTTP_OK);
     }

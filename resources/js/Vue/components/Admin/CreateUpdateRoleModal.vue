@@ -17,6 +17,15 @@
                 ></b-form-input>
             </b-form-group>
         </form>
+        <b-form-group
+                label="Role"
+                label-for="role-input">
+            <b-form-select v-model="role.permissions" :options="permissionOptions" multiple select-size="10">
+                <template #first>
+                    <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                </template>
+            </b-form-select>
+        </b-form-group>
     </b-modal>
 </template>
 
@@ -27,7 +36,17 @@ export default {
     data() {
         return {
             CREATE: 'CREATE',
-            UPDATE: 'UPDATE'
+            UPDATE: 'UPDATE',
+            permissionOptions: []
+        }
+    },
+    asyncComputed: {
+        getRoles() {
+            let self = this;
+            return axios.get('/get-filter/permission')
+                .then((response) => {
+                    self.permissionOptions = response.data.data;
+                })
         }
     },
     methods: {

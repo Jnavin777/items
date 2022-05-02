@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\RoleEnum;
 use App\Models\Branch;
 use App\Models\Inventory;
 use Illuminate\Http\JsonResponse;
@@ -16,7 +17,9 @@ class BranchController extends Controller
      */
     public function index()
     {
-        return view('branches.index');
+        return view('branches.index', [
+            'isAddNewBranch' => in_array(RoleEnum::ROLE_CLIENT,Auth::user()->getRoleNames()->toArray()),
+        ]);
     }
 
     /**
@@ -85,7 +88,14 @@ class BranchController extends Controller
 
     public function getItems()
     {
-        $branches = Branch::where(['user_id' =>Auth::id()])->with('user','respUser')->get();
+        $roles = Auth::user()->getRoleNames()->toArray();
+        if(in_array(RoleEnum::ROLE_CLIENT, $roles)) {
+            $criteria = ['user_id' => Auth::id()];
+        } else {
+            $criteria = ['resp_user_id' => Auth::id()];
+        }
+
+        $branches = Branch::where($criteria)->with('user','respUser')->get();
 
         $data = [];
         if(!empty($branches)) {

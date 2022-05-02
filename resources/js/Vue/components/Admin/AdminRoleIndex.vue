@@ -77,20 +77,19 @@ export default {
         resetRoleModal() {
             this.role = {
                 name: null,
+                permissions: [],
                 id: null
             }
         },
         createItem() {
             this.actionModal = this.CREATE;
-            this.role = {
-                name: null,
-                id: null
-            };
+            this.resetRoleModal();
             this.$bvModal.show('modal-role');
         },
         onEdit(item) {
             this.actionModal = this.UPDATE;
             this.role.name = item.name;
+            this.role.permissions = item.permissions.map(item => item.id);
             this.role.id = item.id;
             this.$bvModal.show('modal-role');
         },

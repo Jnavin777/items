@@ -11,7 +11,9 @@
         </div>
     </x-slot>
     <x-slot name="slot">
-        <branch-index></branch-index>
+        <branch-index
+                :is-add-new-branch="{{ $isAddNewBranch ? 'true' : 'false' }}"
+        ></branch-index>
     </x-slot>
 
 </x-minton-layout>

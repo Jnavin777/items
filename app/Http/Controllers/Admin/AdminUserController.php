@@ -47,7 +47,7 @@ class AdminUserController extends Controller
             $user->password = bcrypt($request->input('password'));
         }
         $user->lockout_time = 10;
-        $user->syncRoles($request->input('roles'));
+        $user->syncRoles($request->input('role'));
         $user->save();
 
         return new JsonResponse($user, Response::HTTP_OK);
@@ -89,7 +89,7 @@ class AdminUserController extends Controller
         if($request->input('password')) {
             $user->password = bcrypt($request->input('password'));
         }
-        $user->syncRoles($request->input('roles'));
+        $user->syncRoles($request->input('role'));
         $user->save();
         return new JsonResponse($user, Response::HTTP_OK);
     }

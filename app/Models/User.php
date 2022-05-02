@@ -57,6 +57,6 @@ class User extends Authenticatable
 
     public function respBranch()
     {
-        return$this->belongsTo(Branch::class);
+        return$this->hasMany(Branch::class,'resp_user_id');
     }
 }

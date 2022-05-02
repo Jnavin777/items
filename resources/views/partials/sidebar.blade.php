@@ -15,14 +15,14 @@
                         <span> Главная </span>
                     </a>
                 </li>
-                @hasanyrole('Super Admin|Client')
+{{--                @hasanyrole('Super Admin|Client')--}}
                 <li>
                     <a href="{{ route('branch.index') }}" class="waves-effect">
                         <i class="remixicon-layout-line"></i>
                         <span> Отделения </span>
                     </a>
                 </li>
-                @endhasanyrole
+{{--                @endhasanyrole--}}
                 <li>
                     <a href="{{ route('inventory.index') }}" class="waves-effect">
                         <i class="remixicon-layout-line"></i>

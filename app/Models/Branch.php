@@ -21,6 +21,6 @@ class Branch extends Model
 
     public function respUser()
     {
-        return $this->belongsTo(User::class,'resp_user_id');
+        return $this->belongsTo(User::class,'resp_user_id','id');
     }
 }

@@ -2,7 +2,7 @@
     <div>
         <b-row>
             <b-col cols="2">
-                <b-button variant="success" @click="createBranch">Add new branch</b-button>
+                <b-button v-if="isAddNewBranch" variant="success" @click="createBranch">Add new branch</b-button>
             </b-col>
             <b-col cols="10">
                 <b-pagination
@@ -54,6 +54,7 @@
 <script>
 export default {
     name: "BranchIndex",
+    props: ['isAddNewBranch'],
     data() {
         return {
             actionModal: 'CREATE',

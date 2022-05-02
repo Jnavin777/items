@@ -43,7 +43,7 @@
             <b-form-group
                 label="Role"
                 label-for="role-input">
-                <b-form-select v-model="user.roles" :options="roleOptions" multiple>
+                <b-form-select v-model="user.role" :options="roleOptions">
                     <template #first>
                         <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
                     </template>

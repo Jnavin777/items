@@ -33,11 +33,13 @@ Route::middleware(['auth', 'auth.lock'])->group(function () {
     Route::get('/inventory/{inventory}/items', [ItemController::class,'getItemsByInventory'])->name('category.getItemsByInventory');
     Route::resource('/inventory', InventoryController::class);
 
-    Route::middleware(['role:Super Admin|Client'])->group(function() {
+    Route::get('/branch/get_resp_item', [BranchController::class,'getRespItems'])->name('branch.getRespItems');
+
+//    Route::middleware(['role:Super Admin|Client'])->group(function() {
         Route::get('/branch/get_item', [BranchController::class,'getItems'])->name('branch.getItems');
         Route::get('/branch/{id}/inventories', [BranchController::class,'getInventories'])->name('branch.getInventories');
         Route::resource('/branch', BranchController::class);
-    });
+//    });
 
 
     Route::get('/category/get_item', [CategoryController::class,'getItems'])->name('category.get-items');
