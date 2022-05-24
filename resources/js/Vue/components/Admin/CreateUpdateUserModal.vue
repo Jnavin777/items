@@ -49,6 +49,18 @@
                     </template>
                 </b-form-select>
             </b-form-group>
+
+            <b-form-group
+                label="Active till"
+                label-for="active-till-input">
+                <b-form-datepicker id="active-till-input" v-model="user.activeTill" class="mb-2"></b-form-datepicker>
+<!--                <b-form-input-->
+<!--                    id="active-till-input"-->
+<!--                    type="date"-->
+<!--                    v-model="user.activeTill"-->
+<!--                    required-->
+<!--                ></b-form-input>-->
+            </b-form-group>
         </form>
     </b-modal>
 </template>

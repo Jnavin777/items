@@ -38,7 +38,7 @@ class BranchController extends Controller
     {
         $newBranch = new Branch();
         $newBranch->name = $request->get('name');
-        $newBranch->resp_user_id = $request->get('respUserId');
+        $newBranch->resp_user_id = $request->get('resp_user_id');
         $newBranch->user_id = Auth::id();
 
         $newBranch->save();

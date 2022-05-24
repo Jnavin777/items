@@ -57,6 +57,11 @@ class User extends Authenticatable
 
     public function respBranch()
     {
-        return$this->hasMany(Branch::class,'resp_user_id');
+        return $this->hasMany(Branch::class,'resp_user_id');
+    }
+
+    public function details()
+    {
+        return$this->hasOne(UserDetails::class);
     }
 }

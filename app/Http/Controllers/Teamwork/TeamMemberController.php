@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Teamwork;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Mpociot\Teamwork\Facades\Teamwork;
 use Mpociot\Teamwork\TeamInvite;
+use Symfony\Component\HttpFoundation\Response;
 
 class TeamMemberController extends Controller
 {
@@ -100,5 +103,33 @@ class TeamMemberController extends Controller
         });
 
         return redirect(route('teams.members.show', $invite->team));
+    }
+
+
+    public function myInvites () {
+        $invites = TeamInvite::where(['email' => Auth::user()->email])->with(['team', 'inviter'])->get()->toArray();
+        return new JsonResponse($invites, Response::HTTP_OK);
+    }
+
+    public function acceptInvites(Request $request)
+    {
+        $invite = Teamwork::getInviteFromAcceptToken( $request->token ); // Returns a TeamworkInvite model or null
+        if(!$invite) {
+            return new JsonResponse(false, Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        Teamwork::acceptInvite( $invite );
+        return  new JsonResponse(true, Response::HTTP_OK);
+    }
+
+    public function rejectInvites(Request $request)
+    {
+        $invite = Teamwork::getInviteFromDenyToken( $request->token ); // Returns a TeamworkInvite model or null
+        if(!$invite) {
+            return new JsonResponse(false, Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        Teamwork::denyInvite( $invite );
+        return  new JsonResponse(true, Response::HTTP_OK);
     }
 }

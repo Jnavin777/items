@@ -30,6 +30,7 @@ import AdminPermissionIndex from "./Vue/components/Admin/AdminPermissionIndex";
 import CreateUpdatePermissionModal from "./Vue/components/Admin/CreateUpdatePermissionModal";
 import CreateUpdateProductModal from "./Vue/components/Admin/CreateUpdateProductModal";
 import AdminProductIndex from "./Vue/components/Admin/AdminProductIndex";
+import InvitesTable from "./Vue/components/InvitesTable";
 
 Vue.prototype.console = console;
 Vue.use(BootstrapVue);
@@ -56,6 +57,7 @@ Vue.component(AdminPermissionIndex.name, AdminPermissionIndex);
 Vue.component(CreateUpdatePermissionModal.name, CreateUpdatePermissionModal);
 Vue.component(AdminProductIndex.name, AdminProductIndex);
 Vue.component(CreateUpdateProductModal.name, CreateUpdateProductModal);
+Vue.component(InvitesTable.name, InvitesTable);
 
 require('../../packages/profiles/src/views/Vue/app.js')
 new Vue().$mount('#wrapper')

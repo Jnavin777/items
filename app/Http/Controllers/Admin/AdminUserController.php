@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserDetails;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -89,6 +90,17 @@ class AdminUserController extends Controller
         if($request->input('password')) {
             $user->password = bcrypt($request->input('password'));
         }
+
+        if($request->input('activeTill')) {
+            $userDetails = UserDetails::where(['user_id' => $user->id])->first();
+            if(!$userDetails) {
+                $userDetails = new UserDetails();
+                $userDetails->user_id = $user->id;
+            }
+            $userDetails->client_active_till = $request->input('activeTill');
+            $userDetails->save();
+        }
+
         $user->syncRoles($request->input('role'));
         $user->save();
         return new JsonResponse($user, Response::HTTP_OK);
@@ -106,7 +118,7 @@ class AdminUserController extends Controller
 
     public function getItems()
     {
-        $users = User::where('id', '!=', Auth::id())->with('roles')->get()->toArray();
+        $users = User::where('id', '!=', Auth::id())->with('roles', 'details')->get()->toArray();
         foreach ($users as $key => $user) {
             $roles = $user['roles'];
             $users[$key]['roles'] = [];

@@ -99,7 +99,7 @@ Route::group(['prefix' => 'teams', 'namespace' => 'Teamwork'], function()
         Route::delete('members/{id}/{user_id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'destroy'])->name('teams.members.destroy');
     });
 
-
+    Route::get('my-invites', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'myInvites'])->name('teams.members.my_invites');
     Route::get('switch/{id}', [App\Http\Controllers\Teamwork\TeamController::class, 'switchTeam'])->name('teams.switch');
 
     Route::get('members/{id}', [App\Http\Controllers\Teamwork\TeamMemberController::class, 'show'])->name('teams.members.show');

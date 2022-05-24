@@ -252,6 +252,7 @@
         'branch_store' : '{{ route('branch.store') }}',
         'branch_get_items' : '{{ route('branch.getItems') }}',
         'item_store' : '{{ route('item.store') }}',
+        'my_invites' : '{{ route('teams.members.my_invites') }}',
     }
 </script>
 <!-- Vendor js -->

@@ -21,8 +21,8 @@
                 ></b-form-input>
             </b-form-group>
             <b-form-group
-                    label="Branch"
-                    label-for="branch-input">
+                    label="Resp user"
+                    label-for="resp-user-input">
                 <b-form-select v-model="branch.resp_user_id" :options="respUserOptions">
                     <template #first>
                         <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>

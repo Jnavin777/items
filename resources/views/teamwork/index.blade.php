@@ -13,6 +13,14 @@
     <x-slot name="slot">
         <div class="row">
             <div class="col-md-12">
+                <div class="card-box">
+                    <h4 class="header-title">Приглашения</h4>
+                    <invites-table></invites-table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <div class="panel panel-default">
                     @hasanyrole('Super Admin|Client')
                     <div class="panel-heading clearfix">

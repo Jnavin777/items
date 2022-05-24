@@ -14,8 +14,8 @@ class CreateUserDetailsTable extends Migration
     public function up()
     {
         Schema::create('user_details', function (Blueprint $table) {
-            $table->integer('user_id');
-            $table->dateTime('client_activ_till');
+            $table->integer('user_id')->primary();
+            $table->dateTime('client_active_till');
             $table->timestamps();
         });
     }

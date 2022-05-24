@@ -69,7 +69,8 @@ export default {
                 email: null,
                 password: null,
                 roles: [],
-                id: null
+                id: null,
+                activeTill: null
             },
             isBusy: false,
             currentPage: 1,
@@ -80,6 +81,7 @@ export default {
                 {key:'name'},
                 {key:'email'},
                 {key:'roles'},
+                {key:'details.client_active_till', label: 'Active till'},
                 {key:'actions'},
             ]
         }
@@ -91,7 +93,8 @@ export default {
                 email: null,
                 password: null,
                 role: null,
-                id: null
+                id: null,
+                activeTill: null
             }
         },
         createUser() {
@@ -106,6 +109,10 @@ export default {
             this.user.password = null;
             this.user.role = item.roles.length > 0 ? item.roles[0].id : null;
             this.user.id = item.id;
+            this.user.activeTill =
+                item.details && item.details.client_active_till
+                    ? item.details.client_active_till
+                    : null;
             this.$bvModal.show('modal-user');
         },
         confirmDelete(item) {
